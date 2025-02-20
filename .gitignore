@@ -1,0 +1,11 @@
+# Ignore environment variable files
+.env
+venv/
+venv
+__pycache__/
+*.pyc
+Lib/
+# data 
+data/raw/*
+data/interim/*
+data/processed/*
