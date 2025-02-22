@@ -10,7 +10,34 @@ CREATE TABLE IF NOT EXISTS stock_prices (
 
 CREATE TABLE IF NOT EXISTS fundamentals (
     symbol VARCHAR(10) PRIMARY KEY,
-    market_cap BIGINT,
-    pe_ratio FLOAT,
-    dividendYield FLOAT
+    marketcap BIGINT,
+    peratio FLOAT,
+    dividendyield FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS news_articles (
+    published_at TIMESTAMP,
+    source VARCHAR(255),
+    title TEXT,
+    content TEXT,
+    url TEXT,
+    symbols VARCHAR(255),
+    url_hash VARCHAR(32) PRIMARY KEY,
+    sentiment VARCHAR(10),
+    sentiment_score FLOAT,
+);
+
+CREATE TABLE IF NOT EXISTS classified_news (
+    published_at TIMESTAMP,
+    source VARCHAR(255),
+    title TEXT,
+    content TEXT,
+    url TEXT,
+    symbols VARCHAR(255),
+    url_hash VARCHAR(32) PRIMARY KEY,
+    sentiment VARCHAR(10),
+    sentiment_score FLOAT,
+    negative FLOAT,
+    neutral FLOAT,
+    positive FLOAT
 );

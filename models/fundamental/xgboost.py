@@ -386,28 +386,6 @@ def monitor_model_performance(symbol: str, lookback_days=30):
         raise
 
 
-'''
-def validate_data(df: pd.DataFrame):
-    """Validate data before preprocessing"""
-    # Check data types
-    logging.info(f"DataFrame shape: {df.shape}")
-
-    numeric_cols = df.select_dtypes(include=[np.number]).columns
-    categorical_cols = df.select_dtypes(include=['object']).columns
-    
-    logging.info(f"DataFrame shape: {df.shape}")
-    logging.info(f"Numeric columns: {list(numeric_cols)}")
-    logging.info(f"Categorical columns: {list(categorical_cols)}")
-    
-    # Check for nulls
-    null_counts = df.isnull().sum()
-    if null_counts.any():
-        logging.warning("Columns with null values:")
-        for col in null_counts[null_counts > 0].index:
-            logging.warning(f"{col}: {null_counts[col]} nulls")
-            
-    return df
-'''
 def validate_data(df: pd.DataFrame):
     """Validate data before preprocessing with more comprehensive checks"""
     # Basic shape and type checks

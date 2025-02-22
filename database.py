@@ -40,7 +40,7 @@ def load_csv_to_table(conn: psycopg2.extensions.connection, csv_path: str, table
                                 sql.Identifier(table_name),
                                 columns,
                                 sql.SQL(', ').join(sql.Placeholder() * len(df.columns))
-                            )
+                            ) # Remove date for fundamentals data
             # Execute batch insert
             cur.executemany(query, records)
             conn.commit()
@@ -52,7 +52,7 @@ def load_csv_to_table(conn: psycopg2.extensions.connection, csv_path: str, table
             raise
 
 
-
+# Load stock prices
 if __name__ == "__main__":
     stock_files = [
         "data/raw/msft_daily.csv",
@@ -77,3 +77,31 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Error connecting to database: {str(e)}")
         raise
+
+'''
+# Load fundamentals data
+if __name__ == "__main__":
+    fundamentals_files = [
+        "data/interim/msft_fundamentals.csv",
+        "data/interim/aapl_fundamentals.csv",
+        "data/interim/amzn_fundamentals.csv"
+    ]
+
+
+    try:
+        with db_connection() as conn:
+            logger.info("Connected to database")
+
+            for file in fundamentals_files:
+                try:
+                    load_csv_to_table(conn, file, "fundamentals")
+                except Exception as e:
+                    logger.error(f"Failed to process{file}: {e}")
+                    continue
+        conn.close()
+        logger.info("Database connection closed")
+ 
+    except Exception as e:
+        logger.error(f"Error connecting to database: {str(e)}")
+        raise
+'''
