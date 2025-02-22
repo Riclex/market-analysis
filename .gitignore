@@ -9,3 +9,4 @@ Lib/
 data/raw/*
 data/interim/*
 data/processed/*
+data/news/*
